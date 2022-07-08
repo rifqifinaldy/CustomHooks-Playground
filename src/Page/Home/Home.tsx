@@ -8,9 +8,17 @@ const Home = () => {
   useEffect(() => {
     getTodosApi.request();
   }, []);
-  console.log(getTodosApi)
+  console.log(getTodosApi);
 
-  return <h1>{getTodosApi.loading}</h1>;
+  return (
+    <ul>
+      {getTodosApi.loading === true
+        ? "Loading..."
+        : getTodosApi.data !== null
+        ? getTodosApi.data.map((data, i) => <li key={i}>{data.title}</li>)
+        : getTodosApi.error}
+    </ul>
+  );
 };
 
 export default Home;
